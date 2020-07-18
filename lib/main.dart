@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:medec_app/routes/routes.dart';
 
 void main() => runApp(MyApp());
 
@@ -8,6 +9,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Material App',
+      initialRoute: '/',
+      routes: AppRoutes().routes(),
       theme: ThemeData(
         primaryColor: Colors.deepPurple[600],
         accentColor: Colors.amber,
@@ -27,12 +30,12 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: Scaffold(
-        // appBar: AppBar(
-        //   title: Text('Material App Bar'),
-        // ),
-        body: SplashScreen(),
-      ),
+      // home: Scaffold(
+      //   // appBar: AppBar(
+      //   //   title: Text('Material App Bar'),
+      //   // ),
+      //   body: SplashScreen(),
+      // ),
     );
   }
 }
@@ -42,32 +45,34 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      height: double.infinity,
-      color: Theme.of(context).primaryColor,
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text('Medec',
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.headline5),
-            SizedBox(
-              height: 20,
-            ),
-            Container(
-              height: 50,
-              width: 50,
-              child: FittedBox(
-                fit: BoxFit.fill,
-                child: Icon(
-                  Icons.search,
-                  color: Colors.white,
+    return Scaffold(
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        color: Theme.of(context).primaryColor,
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text('Medec',
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.headline5),
+              SizedBox(
+                height: 20,
+              ),
+              Container(
+                height: 50,
+                width: 50,
+                child: FittedBox(
+                  fit: BoxFit.fill,
+                  child: Icon(
+                    Icons.search,
+                    color: Colors.white,
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
