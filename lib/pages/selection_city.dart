@@ -208,9 +208,9 @@ class _SelectionCityState extends State<SelectionCity> {
 
   Widget _listViewDepartmentsBody(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(
-        horizontal: SelectionCity.PADDING_PRIMARY_VIEW,
-      ),
+      // padding: EdgeInsets.symmetric(
+      //   horizontal: SelectionCity.PADDING_PRIMARY_VIEW,
+      // ),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.only(
@@ -218,22 +218,56 @@ class _SelectionCityState extends State<SelectionCity> {
           topRight: Radius.circular(SelectionCity.ROUND_PRIMARY_VIEW),
         ),
       ),
-      child: ListView.builder(
-          padding: const EdgeInsets.all(8),
-          itemCount: filteredDeparments.length,
-          itemBuilder: (BuildContext context, int index) {
-            return Column(children: [
-              ListTile(
-                title: Text(
-                  '${filteredDeparments[index]}',
-                  style: Theme.of(context).textTheme.headline6,
-                ),
+      child: filteredDeparments.length == 0
+          ? Container(
+              width: double.infinity,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Icon(
+                    Icons.save_alt,
+                    color: Colors.grey,
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Text(
+                    'Ups! There are departments with that name..',
+                    style: Theme.of(context).textTheme.headline6.copyWith(
+                          color: Colors.grey,
+                        ),
+                  )
+                ],
               ),
-              Divider(
-                color: Colors.grey.withOpacity(0.4),
-              )
-            ]);
-          }),
+            )
+          : ListView.builder(
+              padding: const EdgeInsets.all(8),
+              itemCount: filteredDeparments.length,
+              itemBuilder: (BuildContext context, int index) {
+                return Material(
+                  color: Colors.transparent,
+                  child: InkWell(
+                    splashColor: Colors.white.withOpacity(0.5),
+                    onTap: () {},
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: SelectionCity.PADDING_PRIMARY_VIEW),
+                      child: Column(children: [
+                        ListTile(
+                          title: Text(
+                            filteredDeparments[index],
+                            style: Theme.of(context).textTheme.headline6,
+                          ),
+                        ),
+                        Divider(
+                          color: Colors.grey.withOpacity(0.4),
+                        )
+                      ]),
+                    ),
+                  ),
+                );
+              }),
     );
   }
 
