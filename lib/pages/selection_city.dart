@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
 
-class SelectionCity extends StatelessWidget {
+class SelectionCity extends StatefulWidget {
   SelectionCity({Key key}) : super(key: key);
-  static const PADDING_PRIMARY_VIEW = 20.0;  // APP BAR, CARDVIEWS
-  static const ROUND_PRIMARY_VIEW = 20.0;  // TEXTFIELD, CARD
+  static const PADDING_PRIMARY_VIEW = 20.0; // APP BAR, CARDVIEWS
+  static const ROUND_PRIMARY_VIEW = 20.0; // TEXTFIELD, CARD
 
-  static const DEPARTMENTS_DATA= ["Ancash",
+  @override
+  _SelectionCityState createState() => _SelectionCityState();
+}
+
+class _SelectionCityState extends State<SelectionCity> {
+  // TextEditingController placeNameController = TextEditingController();
+
+  static const DEPARTMENTS_DATA = [
+    "Ancash",
     "Apurímac",
     "Arequipa",
     "Ayacucho",
@@ -27,7 +35,9 @@ class SelectionCity extends StatelessWidget {
     "San Martin",
     "Tacna",
     "Tumbes",
-    "Ucayali"];
+    "Ucayali"
+  ];
+  List<String> filteredDeparments = DEPARTMENTS_DATA;
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +68,6 @@ class SelectionCity extends StatelessWidget {
   }
 
   Widget _backgroundTop(BuildContext context) {
-
     return Column(
       children: <Widget>[
         Container(
@@ -67,8 +76,8 @@ class SelectionCity extends StatelessWidget {
           decoration: BoxDecoration(
             color: Theme.of(context).primaryColor,
             borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(ROUND_PRIMARY_VIEW),
-              bottomRight: Radius.circular(ROUND_PRIMARY_VIEW),
+              bottomLeft: Radius.circular(SelectionCity.ROUND_PRIMARY_VIEW),
+              bottomRight: Radius.circular(SelectionCity.ROUND_PRIMARY_VIEW),
             ),
           ),
         ),
@@ -79,7 +88,7 @@ class SelectionCity extends StatelessWidget {
   Widget _toolbarTop(BuildContext context) {
     return SafeArea(
       child: Container(
-        margin: EdgeInsets.all(PADDING_PRIMARY_VIEW),
+        margin: EdgeInsets.all(SelectionCity.PADDING_PRIMARY_VIEW),
         child: Row(
           children: <Widget>[
             Icon(
@@ -113,7 +122,7 @@ class SelectionCity extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.all(
-          Radius.circular(ROUND_PRIMARY_VIEW),
+          Radius.circular(SelectionCity.ROUND_PRIMARY_VIEW),
         ),
         boxShadow: [
           BoxShadow(
@@ -135,6 +144,20 @@ class SelectionCity extends StatelessWidget {
               color: Colors.grey,
             ),
           ),
+          textInputAction: TextInputAction.done,
+          onChanged: (text) {
+            // print(value);
+            setState(() {
+              if (text.isEmpty) {
+                filteredDeparments = DEPARTMENTS_DATA;
+              } else {
+                filteredDeparments = DEPARTMENTS_DATA
+                    .where((element) =>
+                        element.toLowerCase().startsWith(text.toLowerCase()))
+                    .toList();
+              }
+            });
+          },
           style: Theme.of(context).textTheme.headline6,
         ),
       ),
@@ -155,7 +178,7 @@ class SelectionCity extends StatelessWidget {
           },
           child: Padding(
             padding: const EdgeInsets.symmetric(
-              horizontal: PADDING_PRIMARY_VIEW,
+              horizontal: SelectionCity.PADDING_PRIMARY_VIEW,
             ),
             child: Row(
               children: <Widget>[
@@ -186,23 +209,23 @@ class SelectionCity extends StatelessWidget {
   Widget _listViewDepartmentsBody(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(
-        horizontal: PADDING_PRIMARY_VIEW,
+        horizontal: SelectionCity.PADDING_PRIMARY_VIEW,
       ),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(ROUND_PRIMARY_VIEW),
-          topRight: Radius.circular(ROUND_PRIMARY_VIEW),
+          topLeft: Radius.circular(SelectionCity.ROUND_PRIMARY_VIEW),
+          topRight: Radius.circular(SelectionCity.ROUND_PRIMARY_VIEW),
         ),
       ),
       child: ListView.builder(
           padding: const EdgeInsets.all(8),
-          itemCount: DEPARTMENTS_DATA.length,
+          itemCount: filteredDeparments.length,
           itemBuilder: (BuildContext context, int index) {
             return Column(children: [
               ListTile(
                 title: Text(
-                  '${DEPARTMENTS_DATA[index]}',
+                  '${filteredDeparments[index]}',
                   style: Theme.of(context).textTheme.headline6,
                 ),
               ),
