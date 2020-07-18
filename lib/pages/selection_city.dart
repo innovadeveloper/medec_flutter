@@ -5,6 +5,30 @@ class SelectionCity extends StatelessWidget {
   static const PADDING_PRIMARY_VIEW = 20.0;  // APP BAR, CARDVIEWS
   static const ROUND_PRIMARY_VIEW = 20.0;  // TEXTFIELD, CARD
 
+  static const DEPARTMENTS_DATA= ["Ancash",
+    "Apurímac",
+    "Arequipa",
+    "Ayacucho",
+    "Cajamarca",
+    "Cuzco",
+    "Huancavelica",
+    "Huánuco",
+    "Ica",
+    "Junín",
+    "La Libertad",
+    "Lambayeque",
+    "Lima",
+    "Loreto",
+    "Madre de Dios",
+    "Moquegua",
+    "Pasco",
+    "Piura",
+    "Puno",
+    "San Martin",
+    "Tacna",
+    "Tumbes",
+    "Ucayali"];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -160,9 +184,6 @@ class SelectionCity extends StatelessWidget {
   }
 
   Widget _listViewDepartmentsBody(BuildContext context) {
-    final elementsList = _listElements(20); // only test
-    var roundCorner = 20.0;
-
     return Container(
       padding: EdgeInsets.symmetric(
         horizontal: PADDING_PRIMARY_VIEW,
@@ -170,18 +191,19 @@ class SelectionCity extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(roundCorner),
-          topRight: Radius.circular(roundCorner),
+          topLeft: Radius.circular(ROUND_PRIMARY_VIEW),
+          topRight: Radius.circular(ROUND_PRIMARY_VIEW),
         ),
       ),
       child: ListView.builder(
           padding: const EdgeInsets.all(8),
-          itemCount: elementsList.length,
+          itemCount: DEPARTMENTS_DATA.length,
           itemBuilder: (BuildContext context, int index) {
             return Column(children: [
               ListTile(
                 title: Text(
-                  'Entry ${elementsList[index]}',
+                  '${DEPARTMENTS_DATA[index]}',
+                  style: Theme.of(context).textTheme.headline6,
                 ),
               ),
               Divider(
@@ -202,14 +224,3 @@ class SelectionCity extends StatelessWidget {
 
   Widget _widget(BuildContext context) {}
 }
-
-// TextField(
-//   decoration: InputDecoration(
-//     border: InputBorder.none,
-//     hintText: 'Search here',
-//   ),
-//   maxLines: 1,
-//   style: Theme.of(context).textTheme.headline6.copyWith(
-//         height: 1,
-//       ),
-// ),
