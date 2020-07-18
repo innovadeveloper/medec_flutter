@@ -1,14 +1,25 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 class SelectionCity extends StatelessWidget {
-  const SelectionCity({Key key}) : super(key: key);
+
+  SelectionCity({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(children: [
         _backgroundTop(context),
-        _searchInputTop(context),
+        _toolbarTop(context),
+        Column(
+          children: <Widget>[
+            _searchInputTop(context),
+            Expanded(
+              child: _listViewDepartments(context),
+            ),
+          ],
+        ),
       ]),
     );
   }
@@ -30,6 +41,32 @@ class SelectionCity extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+
+  Widget _toolbarTop(BuildContext context) {
+    return SafeArea(
+      child: Container(
+        margin: EdgeInsets.all(20.0),
+        child: Row(
+          children: <Widget>[
+            Icon(
+              Icons.clear,
+              color: Colors.white,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 20),
+              child: Text(
+                'Select your city',
+                style: Theme.of(context).textTheme.headline5.copyWith(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 
@@ -72,7 +109,32 @@ class SelectionCity extends StatelessWidget {
       ),
     );
   }
+
+  Widget _listViewDepartments(BuildContext context) {
+    final elementsList = _listElements(20); // only test
+    
+    return ListView.builder(
+        padding: const EdgeInsets.all(8),
+        itemCount: elementsList.length,
+        itemBuilder: (BuildContext context, int index) {
+
+          return Container(
+            height: 50,
+            color: Colors.primaries[Random().nextInt(Colors.primaries.length)],
+            child: Center(child: Text('Entry ${elementsList[index]}')),
+          );
+        });
+  }
+
+  List<Map<int, String>> _listElements(int listSize) {
+    return List<Map<int, String>>.generate(
+        listSize,
+        (int index) => {
+              index : "A${index}",
+            });
+  }
 }
+
 // TextField(
 //   decoration: InputDecoration(
 //     border: InputBorder.none,

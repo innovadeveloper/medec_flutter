@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
         accentColor: Colors.amber,
         textTheme: TextTheme(
           headline5: TextStyle(
-            fontSize: 72.0,
+            fontSize: 18.0,
             fontWeight: FontWeight.w400,
             color: Colors.white,
             fontFamily: 'Poppins',
