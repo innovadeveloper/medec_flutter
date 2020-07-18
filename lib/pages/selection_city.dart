@@ -1,22 +1,23 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 
 class SelectionCity extends StatelessWidget {
-
   SelectionCity({Key key}) : super(key: key);
+  static const PADDING_PRIMARY_VIEW = 20.0;  // APP BAR, CARDVIEWS
+  static const ROUND_PRIMARY_VIEW = 20.0;  // TEXTFIELD, CARD
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(children: [
+        _backgroundColor(context),
         _backgroundTop(context),
         _toolbarTop(context),
         Column(
           children: <Widget>[
             _searchInputTop(context),
+            _useLocationBody(context),
             Expanded(
-              child: _listViewDepartments(context),
+              child: _listViewDepartmentsBody(context),
             ),
           ],
         ),
@@ -24,19 +25,26 @@ class SelectionCity extends StatelessWidget {
     );
   }
 
+  Widget _backgroundColor(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      height: double.infinity,
+      color: Colors.grey[200],
+    );
+  }
+
   Widget _backgroundTop(BuildContext context) {
-    var roundCorner = 40.0;
 
     return Column(
       children: <Widget>[
         Container(
           width: double.infinity,
-          height: 200,
+          height: 150,
           decoration: BoxDecoration(
             color: Theme.of(context).primaryColor,
             borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(roundCorner),
-              bottomRight: Radius.circular(roundCorner),
+              bottomLeft: Radius.circular(ROUND_PRIMARY_VIEW),
+              bottomRight: Radius.circular(ROUND_PRIMARY_VIEW),
             ),
           ),
         ),
@@ -47,7 +55,7 @@ class SelectionCity extends StatelessWidget {
   Widget _toolbarTop(BuildContext context) {
     return SafeArea(
       child: Container(
-        margin: EdgeInsets.all(20.0),
+        margin: EdgeInsets.all(PADDING_PRIMARY_VIEW),
         child: Row(
           children: <Widget>[
             Icon(
@@ -71,10 +79,9 @@ class SelectionCity extends StatelessWidget {
   }
 
   Widget _searchInputTop(BuildContext context) {
-    var roundCorner = 20.0;
     return Container(
       margin: EdgeInsets.only(
-        top: 160,
+        top: 110,
         left: 20,
         right: 20,
       ),
@@ -82,7 +89,7 @@ class SelectionCity extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.all(
-          Radius.circular(roundCorner),
+          Radius.circular(ROUND_PRIMARY_VIEW),
         ),
         boxShadow: [
           BoxShadow(
@@ -110,29 +117,90 @@ class SelectionCity extends StatelessWidget {
     );
   }
 
-  Widget _listViewDepartments(BuildContext context) {
-    final elementsList = _listElements(20); // only test
-    
-    return ListView.builder(
-        padding: const EdgeInsets.all(8),
-        itemCount: elementsList.length,
-        itemBuilder: (BuildContext context, int index) {
+  Widget _useLocationBody(BuildContext context) {
+    return Material(
+      color: Colors.transparent,
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+          vertical: 30.0,
+        ),
+        child: InkWell(
+          splashColor: Colors.white60,
+          onTap: () {
+            print("click..!");
+          },
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: PADDING_PRIMARY_VIEW,
+            ),
+            child: Row(
+              children: <Widget>[
+                CircleAvatar(
+                  backgroundColor: Colors.white,
+                  child: Icon(
+                    Icons.location_on,
+                    color: Theme.of(context).primaryColor,
+                  ),
+                ),
+                SizedBox(
+                  width: 20,
+                ),
+                Text(
+                  'Use current location',
+                  style: Theme.of(context).textTheme.headline6.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
+                )
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
 
-          return Container(
-            height: 50,
-            color: Colors.primaries[Random().nextInt(Colors.primaries.length)],
-            child: Center(child: Text('Entry ${elementsList[index]}')),
-          );
-        });
+  Widget _listViewDepartmentsBody(BuildContext context) {
+    final elementsList = _listElements(20); // only test
+    var roundCorner = 20.0;
+
+    return Container(
+      padding: EdgeInsets.symmetric(
+        horizontal: PADDING_PRIMARY_VIEW,
+      ),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(roundCorner),
+          topRight: Radius.circular(roundCorner),
+        ),
+      ),
+      child: ListView.builder(
+          padding: const EdgeInsets.all(8),
+          itemCount: elementsList.length,
+          itemBuilder: (BuildContext context, int index) {
+            return Column(children: [
+              ListTile(
+                title: Text(
+                  'Entry ${elementsList[index]}',
+                ),
+              ),
+              Divider(
+                color: Colors.grey.withOpacity(0.4),
+              )
+            ]);
+          }),
+    );
   }
 
   List<Map<int, String>> _listElements(int listSize) {
     return List<Map<int, String>>.generate(
         listSize,
         (int index) => {
-              index : "A${index}",
+              index: "A${index}",
             });
   }
+
+  Widget _widget(BuildContext context) {}
 }
 
 // TextField(
