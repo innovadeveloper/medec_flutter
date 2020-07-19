@@ -34,6 +34,7 @@ class Login extends StatelessWidget {
       body: Column(
         children: <Widget>[
           _backgroundTop(context),
+          _loginButtonsBody(context),
           // Container(
           //   child: Text(
           //     'Login',
@@ -89,6 +90,82 @@ class Login extends StatelessWidget {
             ),
           )
         ],
+      ),
+    );
+  }
+
+  Widget _loginButtonsBody(BuildContext context) {
+    var mediaQuery = MediaQuery.of(context);
+    var heightBackground = _screenTotalSizeWithoutAppBar(mediaQuery) * 0.5;
+
+    return Container(
+      height: heightBackground,
+      child: Column(
+        children: <Widget>[
+          SizedBox(
+            height: 80,
+          ),
+          _buttonLogin(
+            context,
+            Colors.black,
+            'Mobile number',
+            () {},
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          _buttonLogin(
+            context,
+            Colors.blue,
+            'Facebook',
+            () {},
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          _buttonLogin(
+            context,
+            Colors.red,
+            'Google',
+            () {},
+          ),
+          Expanded(
+            child: Container(),
+          ),
+          Text(
+            'By continuing, you agree to Terms & Conditions',
+            style: Theme.of(context)
+                .textTheme
+                .headline6
+                .copyWith(color: Colors.grey, fontSize: 11),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buttonLogin(
+      BuildContext context, Color color, String loginText, Function function) {
+    var mediaQuery = MediaQuery.of(context);
+    var widthInput = mediaQuery.size.width * 0.8;
+    return Container(
+      width: widthInput,
+      child: OutlineButton(
+        child: new Text(loginText),
+        onPressed: function,
+        textColor: color,
+        highlightedBorderColor: Colors.grey[300],
+        borderSide: BorderSide(
+          color: Colors.grey[300],
+        ),
+        shape: new RoundedRectangleBorder(
+          borderRadius: new BorderRadius.circular(
+            30.0,
+          ),
+        ),
       ),
     );
   }
