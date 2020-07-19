@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Material App',
-      initialRoute: '/onboarding',
+      initialRoute: '/login',
       routes: AppRoutes().routes(),
       theme: ThemeData(
         primaryColor: Colors.deepPurple[600],
@@ -18,6 +18,18 @@ class MyApp extends StatelessWidget {
           buttonColor: Colors.deepPurple[600],
         ),
         textTheme: TextTheme(
+          headline3: TextStyle(
+            fontSize: 30.0,
+            fontWeight: FontWeight.w600,
+            color: Colors.white,
+            fontFamily: 'Poppins',
+          ),
+          headline4: TextStyle(
+            fontSize: 24.0,
+            fontWeight: FontWeight.w600,
+            color: Colors.white,
+            fontFamily: 'Poppins',
+          ),
           headline5: TextStyle(
             fontSize: 18.0,
             fontWeight: FontWeight.w400,
