@@ -9,6 +9,7 @@ class AssetsUtils {
   static const BG_ONBOARDING_3 = IMAGE_DIRECTORY_PATH + "onboarding_3.png";
   // static const BG_ONBOARDING_4 = IMAGE_DIRECTORY_PATH + "onboarding_4.png";
   static const BG_PHOTO_DOCTOR = IMAGE_DIRECTORY_PATH + "medic_photo_background.png";
+  static const ICON_VERIFICATION_PHONE_NUMBER = IMAGE_DIRECTORY_PATH + "icon_verification.png";
 
 
 }
