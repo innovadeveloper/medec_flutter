@@ -36,20 +36,22 @@ class RegisterPinVerify extends StatelessWidget {
         // Create an inner BuildContext so that the onPressed methods
         // can refer to the Scaffold with Scaffold.of().
         builder: (BuildContext context) {
-      return SafeArea(
-        child: Container(
-          // color: Theme.of(context).primaryColor,
-          child: Column(
-            children: <Widget>[
-              Container(
-                height: heightTop,
-                child: Column(children: [
-                  _toolbarTop(context),
-                  _descriptionTop(context),
-                ]),
-              ),
-              _middleBottomBody(context),
-            ],
+      return SingleChildScrollView(
+        child: SafeArea(
+          child: Container(
+            // color: Theme.of(context).primaryColor,
+            child: Column(
+              children: <Widget>[
+                Container(
+                  height: heightTop,
+                  child: Column(children: [
+                    _toolbarTop(context),
+                    _descriptionTop(context),
+                  ]),
+                ),
+                _middleBottomBody(context),
+              ],
+            ),
           ),
         ),
       );
@@ -176,7 +178,15 @@ class RegisterPinVerify extends StatelessWidget {
                       // final snackBar =
                       //     SnackBar(content: Text('Yay! A SnackBar!'));
                       // Scaffold.of(context).showSnackBar(snackBar);
-                      createSnackBar(context, 'Title - subtitle');
+                      String insertedPinString = pinOneController.text +
+                          pinTwoController.text +
+                          pinThirdController.text +
+                          pinFourController.text;
+                      if (insertedPinString.length == 0) {
+                        createSnackBar(context, 'PIN Empty');
+                        return;
+                      }
+                      createSnackBar(context, insertedPinString);
                     },
                     textColor: Colors.white,
                     color: Theme.of(context).primaryColor,
@@ -195,14 +205,18 @@ class RegisterPinVerify extends StatelessWidget {
     );
   }
 
+  /**
+   * crea snack bar con contenido ingresado
+   */
   void createSnackBar(BuildContext context, String message) {
+    final heightSnackbar = 30.0;
     final snackBar = SnackBar(
         content: Container(
-      height: 30,
+      height: heightSnackbar,
       child: Column(
         children: <Widget>[
           SizedBox(
-            height: 20.0,
+            height: heightSnackbar * 0.6,
             child: FittedBox(
                 fit: BoxFit.fitHeight,
                 child: Text(
@@ -211,12 +225,15 @@ class RegisterPinVerify extends StatelessWidget {
                 )),
           ),
           SizedBox(
-            height: 10.0,
+            height: heightSnackbar * 0.4,
             child: FittedBox(
                 fit: BoxFit.fitHeight,
                 child: Text(
-                  message,
-                  style: Theme.of(context).textTheme.headline6,
+                  'PIN inserted',
+                  style: Theme.of(context)
+                      .textTheme
+                      .headline6
+                      .copyWith(color: Colors.white),
                 )),
           ),
         ],
