@@ -13,6 +13,12 @@ class AssetsUtils {
   static const ICON_MICROSCOPE = IMAGE_DIRECTORY_PATH + "microscope.png";
   static const ICON_NURSE = IMAGE_DIRECTORY_PATH + "nurse.png";
   static const ICON_PILL = IMAGE_DIRECTORY_PATH + "pill.png";
+  static const BG_SPONSORED = IMAGE_DIRECTORY_PATH + "sponsored_background.png";
+
+  static const BG_DOCTOR_1 = IMAGE_DIRECTORY_PATH + "doctor_1.png";
+  static const BG_DOCTOR_2 = IMAGE_DIRECTORY_PATH + "doctor_2.png";
+  static const BG_DOCTOR_3 = IMAGE_DIRECTORY_PATH + "doctor_3.png";
+
 
 
 }
