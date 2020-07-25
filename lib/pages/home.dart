@@ -52,8 +52,9 @@ class _HomeState extends State<Home> {
           children: <Widget>[
             _optionsHomeTop(context),
             Expanded(
-              child: Container(),
+              child: Container(height: 20,),
             ),
+            _listBannerSponsored(context),
           ],
         ),
       ]),
@@ -185,6 +186,18 @@ class _HomeState extends State<Home> {
   }
 //#endregion
 
+Widget _listBannerSponsored(BuildContext context){
+  return ListView.builder(
+    itemCount: 4,
+    scrollDirection: Axis.horizontal,
+    itemBuilder: (BuildContext context, int index){
+      return Container(
+        color: Colors.red,
+        height: 300,
+        width: 500,
+        child: Text('hola $index'),);
+  });
+}
   List<Map<int, String>> _listElements(int listSize) {
     return List<Map<int, String>>.generate(
         listSize,
