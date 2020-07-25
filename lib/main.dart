@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Material App',
-      initialRoute: '/batery_info',
+      initialRoute: '/register_pin_verify',
       routes: AppRoutes().routes(),
       theme: ThemeData(
         primaryColor: Colors.deepPurple[600],
