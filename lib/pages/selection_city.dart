@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:medec_app/utils/DecorationUtils.dart';
 
 class SelectionCity extends StatefulWidget {
   SelectionCity({Key key}) : super(key: key);
@@ -119,20 +120,7 @@ class _SelectionCityState extends State<SelectionCity> {
         right: 20,
       ),
       padding: EdgeInsets.all(5.0),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.all(
-          Radius.circular(SelectionCity.ROUND_PRIMARY_VIEW),
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.5),
-            spreadRadius: 5,
-            blurRadius: 7,
-            offset: Offset(0, 3), // changes position of shadow
-          ),
-        ],
-      ),
+      decoration: DecorationUtils.boxDecorationShadowOval(SelectionCity.ROUND_PRIMARY_VIEW),
       child: Container(
         margin: EdgeInsets.symmetric(horizontal: 5.0),
         child: TextField(

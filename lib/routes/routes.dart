@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:medec_app/main.dart';
 import 'package:medec_app/pages/batery_info.dart';
+import 'package:medec_app/pages/home.dart';
 import 'package:medec_app/pages/login.dart';
 import 'package:medec_app/pages/onboarding.dart';
 import 'package:medec_app/pages/register_phone_number.dart';
@@ -18,6 +19,7 @@ class AppRoutes {
         '/login' : (BuildContext context ) => Login(),
         '/register_phone_number' : (BuildContext context ) => RegisterPhoneNumber(),
         '/register_pin_verify' : (BuildContext context ) => RegisterPinVerify(),
+        '/home' : (BuildContext context ) => Home(),
       };
  }
   
